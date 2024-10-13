@@ -1,0 +1,26 @@
+name: gping-gael
+version: "1.17.3"
+base: core22
+summary: Ping, but with a graph
+description: Just run gping-gael.gping [host]. host can be a command like curl google.com if the --cmd flag is used. You can also use shorthands like aws:eu-west-1 or aws:ca-central-1 to ping specific cloud regions. Only aws is currently supported.
+
+grade: stable
+confinement: strict
+
+architectures:
+  - build-on: amd64
+
+license: "MIT"
+
+apps:
+  gping:
+    command: gping
+    plugs:
+      - network
+
+parts:
+  app:
+    plugin: dump
+    source: https://github.com/orf/gping/releases/download/gping-v1.17.3/gping-Linux-x86_64.tar.gz
+    stage-packages:
+      - iputils-ping
